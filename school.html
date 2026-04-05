@@ -1,0 +1,2440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABC Public School - Your City</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0369a1;
+            --primary-dark: #075985;
+            --primary-light: #0ea5e9;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --sky-50: #f0f9ff;
+            --sky-100: #e0f2fe;
+            --sky-200: #bae6fd;
+            --sky-300: #7dd3fc;
+            --sky-400: #38bdf8;
+            --sky-500: #0ea5e9;
+            --sky-600: #0284c7;
+            --sky-700: #0369a1;
+            --sky-800: #075985;
+            --sky-900: #0c4a6e;
+            --slate-50: #f8fafc;
+            --slate-100: #f1f5f9;
+            --slate-200: #e2e8f0;
+            --slate-300: #cbd5e1;
+            --slate-400: #94a3b8;
+            --slate-500: #64748b;
+            --slate-600: #475569;
+            --slate-700: #334155;
+            --slate-800: #1e293b;
+            --slate-900: #0f172a;
+            --white: #ffffff;
+            --green: #16a34a;
+            --green-light: #dcfce7;
+            --orange: #ea580c;
+            --red: #dc2626;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--slate-700);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--slate-200);
+            padding: 0 24px;
+            position: relative;
+            z-index: 100;
+        }
+
+        .navbar-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 72px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--primary), var(--sky-400));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Playfair Display', serif;
+            font-weight: 800;
+            font-size: 20px;
+            box-shadow: 0 4px 12px rgba(3, 105, 161, 0.3);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-name {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--slate-900);
+            line-height: 1.2;
+        }
+
+        .logo-tagline {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--sky-600);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--slate-600);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--primary), var(--sky-500));
+            color: white !important;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600 !important;
+            transition: all 0.3s !important;
+            box-shadow: 0 4px 15px rgba(3, 105, 161, 0.3);
+        }
+
+        .nav-cta::after {
+            display: none !important;
+        }
+
+        .nav-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(3, 105, 161, 0.4) !important;
+        }
+
+        .mobile-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--slate-700);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .mobile-toggle:hover {
+            background: var(--slate-100);
+        }
+
+        .mobile-menu {
+            display: none;
+            background: white;
+            border-top: 1px solid var(--slate-200);
+            padding: 16px 24px;
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 12px 0;
+            color: var(--slate-600);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 15px;
+            border-bottom: 1px solid var(--slate-100);
+            transition: color 0.3s;
+        }
+
+        .mobile-menu a:last-child {
+            border-bottom: none;
+        }
+
+        .mobile-menu a:hover {
+            color: var(--primary);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--sky-50) 0%, var(--white) 50%, var(--sky-100) 100%);
+        }
+
+        .hero-bg-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.4;
+            background-image: radial-gradient(circle at 20% 50%, rgba(14, 165, 233, 0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 80% 20%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
+                              radial-gradient(circle at 60% 80%, rgba(3, 105, 161, 0.06) 0%, transparent 50%);
+        }
+
+        .hero-grid-pattern {
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: linear-gradient(var(--slate-900) 1px, transparent 1px),
+                              linear-gradient(90deg, var(--slate-900) 1px, transparent 1px);
+            background-size: 60px 60px;
+        }
+
+        .hero-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 80px 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, rgba(3, 105, 161, 0.1), rgba(14, 165, 233, 0.1));
+            border: 1px solid rgba(3, 105, 161, 0.15);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 800;
+            color: var(--slate-900);
+            line-height: 1.1;
+            margin-bottom: 8px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--primary), var(--sky-400));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: var(--slate-500);
+            margin-bottom: 32px;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 36px;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--primary);
+            line-height: 1;
+        }
+
+        .hero-stat-label {
+            font-size: 13px;
+            color: var(--slate-500);
+            font-weight: 500;
+            margin-top: 4px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--primary), var(--sky-500));
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(3, 105, 161, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(3, 105, 161, 0.4);
+        }
+
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: var(--slate-700);
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            border: 2px solid var(--slate-200);
+            cursor: pointer;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(3, 105, 161, 0.1);
+        }
+
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+
+        .hero-image {
+            position: relative;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero-image-wrapper img {
+            width: 100%;
+            height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .hero-image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+        }
+
+        .hero-image-overlay p {
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .hero-float-card {
+            position: absolute;
+            background: white;
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .hero-float-card.card-1 {
+            top: -20px;
+            right: -20px;
+            z-index: 3;
+        }
+
+        .hero-float-card.card-2 {
+            bottom: 40px;
+            left: -30px;
+            z-index: 3;
+            animation-delay: 1.5s;
+        }
+
+        .float-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .float-icon.blue {
+            background: linear-gradient(135deg, var(--sky-100), var(--sky-200));
+            color: var(--primary);
+        }
+
+        .float-icon.amber {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: var(--accent-dark);
+        }
+
+        .float-card-text strong {
+            display: block;
+            font-size: 14px;
+            color: var(--slate-900);
+        }
+
+        .float-card-text span {
+            font-size: 12px;
+            color: var(--slate-500);
+        }
+
+        /* ===== MARQUEE ===== */
+        .marquee-section {
+            background: linear-gradient(135deg, var(--primary), var(--sky-600));
+            padding: 16px 0;
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 48px;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: white;
+            font-weight: 500;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0.9;
+        }
+
+        .marquee-item i {
+            color: var(--accent);
+        }
+
+        /* ===== ABOUT ===== */
+        .section {
+            padding: 80px 24px;
+        }
+
+        .section-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 56px;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .section-label::before,
+        .section-label::after {
+            content: '';
+            width: 24px;
+            height: 2px;
+            background: var(--sky-300);
+            border-radius: 2px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            font-weight: 700;
+            color: var(--slate-900);
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .section-desc {
+            font-size: 16px;
+            color: var(--slate-500);
+            line-height: 1.7;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            display: block;
+            border-radius: 24px;
+        }
+
+        .about-image-badge {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .about-image-badge strong {
+            display: block;
+            font-size: 28px;
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+        }
+
+        .about-image-badge span {
+            font-size: 13px;
+            color: var(--slate-500);
+        }
+
+        .about-content h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--slate-900);
+            margin-bottom: 20px;
+            line-height: 1.3;
+        }
+
+        .about-content p {
+            color: var(--slate-500);
+            margin-bottom: 24px;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        .about-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .about-feature {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: var(--sky-50);
+            border-radius: 12px;
+            border: 1px solid rgba(14, 165, 233, 0.1);
+        }
+
+        .about-feature i {
+            color: var(--primary);
+            flex-shrink: 0;
+        }
+
+        .about-feature span {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--slate-700);
+        }
+
+        /* ===== FEATURES ===== */
+        .features-section {
+            background: var(--slate-50);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 36px 28px;
+            transition: all 0.4s;
+            border: 1px solid var(--slate-100);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--sky-400));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+            transform-origin: left;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .feature-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .feature-icon.blue {
+            background: linear-gradient(135deg, var(--sky-100), var(--sky-200));
+            color: var(--primary);
+        }
+
+        .feature-icon.amber {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: var(--accent-dark);
+        }
+
+        .feature-icon.green {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: var(--green);
+        }
+
+        .feature-icon.purple {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+            color: #7c3aed;
+        }
+
+        .feature-icon.rose {
+            background: linear-gradient(135deg, #ffe4e6, #fecdd3);
+            color: #e11d48;
+        }
+
+        .feature-icon.cyan {
+            background: linear-gradient(135deg, #cffafe, #a5f3fc);
+            color: #0891b2;
+        }
+
+        .feature-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 10px;
+        }
+
+        .feature-card p {
+            font-size: 14px;
+            color: var(--slate-500);
+            line-height: 1.7;
+        }
+
+        /* ===== ACADEMICS ===== */
+        .academics-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+        }
+
+        .academic-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--slate-100);
+            transition: all 0.4s;
+        }
+
+        .academic-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+        }
+
+        .academic-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .academic-card-body {
+            padding: 24px;
+        }
+
+        .academic-card-tag {
+            display: inline-block;
+            background: var(--sky-50);
+            color: var(--primary);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .academic-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 8px;
+        }
+
+        .academic-card p {
+            font-size: 13px;
+            color: var(--slate-500);
+            line-height: 1.6;
+        }
+
+        /* ===== GALLERY ===== */
+        .gallery-section {
+            background: var(--slate-50);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(2, 220px);
+            gap: 16px;
+        }
+
+        .gallery-item {
+            border-radius: 16px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.6), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 20px;
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            opacity: 1;
+        }
+
+        .gallery-item-overlay span {
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .gallery-item:nth-child(1) {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(4) {
+            grid-column: span 2;
+        }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .testimonial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            border: 1px solid var(--slate-100);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+        }
+
+        .testimonial-quote {
+            font-size: 40px;
+            color: var(--sky-200);
+            font-family: 'Playfair Display', serif;
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+
+        .testimonial-card p {
+            font-size: 14px;
+            color: var(--slate-600);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-style: italic;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .testimonial-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--sky-100);
+        }
+
+        .testimonial-author-info strong {
+            display: block;
+            font-size: 14px;
+            color: var(--slate-900);
+        }
+
+        .testimonial-author-info span {
+            font-size: 12px;
+            color: var(--slate-500);
+        }
+
+        .testimonial-stars {
+            display: flex;
+            gap: 2px;
+            margin-bottom: 16px;
+        }
+
+        .testimonial-stars i {
+            color: var(--accent);
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ===== ADMISSION FORM ===== */
+        .admission-section {
+            background: linear-gradient(135deg, var(--primary), var(--sky-700));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .admission-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            background-image: radial-gradient(circle at 30% 70%, white 0%, transparent 50%),
+                              radial-gradient(circle at 70% 30%, white 0%, transparent 50%);
+        }
+
+        .admission-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .admission-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 40px;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .admission-info p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 32px;
+        }
+
+        .admission-perks {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .admission-perk {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            color: white;
+        }
+
+        .admission-perk-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .admission-perk span {
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        .admission-form-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+        }
+
+        .admission-form-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--slate-900);
+            margin-bottom: 4px;
+        }
+
+        .admission-form-card .form-subtitle {
+            font-size: 14px;
+            color: var(--slate-500);
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--slate-700);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--slate-200);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: var(--slate-700);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background: var(--slate-50);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--sky-400);
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+            background: white;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            margin-top: 8px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .form-note {
+            text-align: center;
+            font-size: 12px;
+            color: var(--slate-400);
+            margin-top: 12px;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .contact-card {
+            background: white;
+            border-radius: 20px;
+            padding: 36px 28px;
+            text-align: center;
+            border: 1px solid var(--slate-100);
+            transition: all 0.4s;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.06);
+            border-color: var(--sky-200);
+        }
+
+        .contact-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 24px;
+        }
+
+        .contact-icon.blue {
+            background: linear-gradient(135deg, var(--sky-100), var(--sky-200));
+            color: var(--primary);
+        }
+
+        .contact-icon.green {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+            color: var(--green);
+        }
+
+        .contact-icon.amber {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            color: var(--accent-dark);
+        }
+
+        .contact-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--slate-900);
+            margin-bottom: 8px;
+        }
+
+        .contact-card p {
+            font-size: 14px;
+            color: var(--slate-500);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .contact-card a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            transition: all 0.3s;
+        }
+
+        .contact-card a.blue {
+            color: var(--primary);
+            background: var(--sky-50);
+        }
+
+        .contact-card a.blue:hover {
+            background: var(--sky-100);
+        }
+
+        .contact-card a.green {
+            color: var(--green);
+            background: var(--green-light);
+        }
+
+        .contact-card a.green:hover {
+            background: #bbf7d0;
+        }
+
+        /* ===== MAP ===== */
+        .map-section {
+            background: var(--slate-50);
+            padding: 0 24px 80px;
+        }
+
+        .map-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            border: 4px solid white;
+        }
+
+        .map-inner iframe {
+            width: 100%;
+            height: 350px;
+            border: none;
+            display: block;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            background: var(--slate-900);
+            color: rgba(255, 255, 255, 0.7);
+            padding: 60px 24px 0;
+        }
+
+        .footer-inner {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 40px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-brand .logo-name {
+            color: white;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 10px;
+        }
+
+        .footer-social a {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .footer h4 {
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--sky-400);
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-bottom: 14px;
+            font-size: 14px;
+        }
+
+        .footer-contact-item i {
+            color: var(--sky-400);
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .footer-bottom {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 24px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        /* ===== FLOATING BUTTONS ===== */
+        .floating-buttons {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 999;
+        }
+
+        .floating-btn {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .floating-btn.call {
+            background: linear-gradient(135deg, var(--primary), var(--sky-500));
+        }
+
+        .floating-btn.whatsapp {
+            background: linear-gradient(135deg, #25d366, #128c7e);
+        }
+
+        .floating-btn.top {
+            background: white;
+            color: var(--slate-700);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--slate-200);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+        }
+
+        .floating-btn.top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* ===== TOAST ===== */
+        .toast {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            background: white;
+            padding: 16px 24px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 10000;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border-left: 4px solid var(--green);
+        }
+
+        .toast.show {
+            transform: translateX(0);
+        }
+
+        .toast-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--green-light);
+            color: var(--green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .toast-text {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--slate-700);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 60px 24px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .hero-image {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .academics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .admission-inner {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-inner {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: auto;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+                grid-row: span 1;
+            }
+
+            .gallery-item:nth-child(4) {
+                grid-column: span 1;
+            }
+
+            .gallery-item {
+                height: 200px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+
+            .hero {
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-subtitle {
+                font-size: 16px;
+            }
+
+            .hero-stats {
+                gap: 24px;
+            }
+
+            .hero-stat-num {
+                font-size: 28px;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .hero-buttons a,
+            .hero-buttons button {
+                text-align: center;
+                justify-content: center;
+            }
+
+            .hero-float-card.card-1 {
+                right: 0;
+                top: -10px;
+            }
+
+            .hero-float-card.card-2 {
+                left: 0;
+                bottom: 20px;
+            }
+
+            .section {
+                padding: 60px 16px;
+            }
+
+            .section-title {
+                font-size: 30px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .academics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-features {
+                grid-template-columns: 1fr;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .admission-form-card {
+                padding: 28px;
+            }
+
+            .footer-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 8px;
+                text-align: center;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .gallery-item {
+                height: 160px;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 2;
+            }
+
+            .floating-buttons {
+                bottom: 16px;
+                right: 16px;
+            }
+
+            .floating-btn {
+                width: 50px;
+                height: 50px;
+            }
+
+            .admission-info h2 {
+                font-size: 30px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item:nth-child(1) {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast">
+        <div class="toast-icon">
+            <i data-lucide="check" style="width:18px;height:18px;"></i>
+        </div>
+        <span class="toast-text">Redirecting to WhatsApp...</span>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="navbar-inner">
+            <a href="#" class="logo">
+                <div class="logo-icon" id="logoIcon">A</div>
+                <div class="logo-text">
+                    <div class="logo-name" id="logoName">ABC Public School</div>
+                    <div class="logo-tagline">Excellence in Education</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Why Us</a></li>
+                <li><a href="#academics">Academics</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#testimonials">Reviews</a></li>
+                <li><a href="#admission" class="nav-cta">Apply Now</a></li>
+            </ul>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+                <i data-lucide="menu" style="width:24px;height:24px;"></i>
+            </button>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#about">About Us</a>
+            <a href="#features">Why Choose Us</a>
+            <a href="#academics">Academics</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#testimonials">Reviews</a>
+            <a href="#admission">Apply for Admission</a>
+            <a href="#contact">Contact Us</a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg-pattern"></div>
+        <div class="hero-grid-pattern"></div>
+        <div class="hero-inner">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <div class="hero-badge-dot"></div>
+                    Admissions Open 2025-26
+                </div>
+                <h1>Welcome to <span id="heroSchoolName">ABC Public School</span></h1>
+                <p class="hero-subtitle" id="heroSubtitle">Empowering Young Minds in Your City with world-class education, values, and holistic development since 2005.</p>
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">2500+</div>
+                        <div class="hero-stat-label">Students</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">150+</div>
+                        <div class="hero-stat-label">Expert Faculty</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">98%</div>
+                        <div class="hero-stat-label">Pass Rate</div>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#admission" class="btn-primary">
+                        <i data-lucide="graduation-cap" style="width:18px;height:18px;"></i>
+                        Apply for Admission
+                    </a>
+                    <a href="#" class="btn-whatsapp" id="heroWhatsapp">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Chat on WhatsApp
+                    </a>
+                    <a href="#" class="btn-secondary" id="heroCall">
+                        <i data-lucide="phone" style="width:18px;height:18px;"></i>
+                        Call Now
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-image-wrapper">
+                    <img src="https://picsum.photos/seed/indianschool2025/700/500.jpg" alt="School Campus">
+                    <div class="hero-image-overlay">
+                        <p>🏫 State-of-the-art campus with modern facilities</p>
+                    </div>
+                </div>
+                <div class="hero-float-card card-1">
+                    <div class="float-icon blue">
+                        <i data-lucide="award" style="width:22px;height:22px;"></i>
+                    </div>
+                    <div class="float-card-text">
+                        <strong>CBSE Affiliated</strong>
+                        <span>Recognized Board</span>
+                    </div>
+                </div>
+                <div class="hero-float-card card-2">
+                    <div class="float-icon amber">
+                        <i data-lucide="star" style="width:22px;height:22px;"></i>
+                    </div>
+                    <div class="float-card-text">
+                        <strong>4.8★ Rating</strong>
+                        <span>Parent Reviews</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> CBSE Affiliated</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Smart Classrooms</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Sports Academy</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Science Labs</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Computer Lab</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Library</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Transport Facility</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Safe Campus</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Dance & Music</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Art Studio</div>
+            <!-- Duplicate for seamless loop -->
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> CBSE Affiliated</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Smart Classrooms</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Sports Academy</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Science Labs</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Computer Lab</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Library</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Transport Facility</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Safe Campus</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Dance & Music</div>
+            <div class="marquee-item"><i data-lucide="check-circle" style="width:16px;height:16px;"></i> Art Studio</div>
+        </div>
+    </div>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+        <div class="section-inner">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">About Us</div>
+                <h2 class="section-title">Shaping Future Leaders with Excellence</h2>
+                <p class="section-desc">A legacy of nurturing young minds through balanced education, strong values, and modern teaching methodologies.</p>
+            </div>
+            <div class="about-grid">
+                <div class="about-image animate-on-scroll">
+                    <img src="https://picsum.photos/seed/schoolcampus99/700/500.jpg" alt="School Building">
+                    <div class="about-image-badge">
+                        <strong>20+</strong>
+                        <span>Years of Excellence</span>
+                    </div>
+                </div>
+                <div class="about-content animate-on-scroll">
+                    <h3 id="aboutTitle">ABC Public School — A Name You Can Trust</h3>
+                    <p id="aboutPara1">ABC Public School is a leading institution in Your City, committed to providing quality education that goes beyond textbooks. Our mission is to foster all-round development of students, preparing them to become responsible citizens and future leaders.</p>
+                    <p id="aboutPara2">With a sprawling campus equipped with modern amenities, dedicated faculty, and a nurturing environment, we ensure every child receives the attention and guidance they deserve.</p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i data-lucide="book-open" style="width:18px;height:18px;"></i>
+                            <span>CBSE Curriculum</span>
+                        </div>
+                        <div class="about-feature">
+                            <i data-lucide="users" style="width:18px;height:18px;"></i>
+                            <span>Expert Faculty</span>
+                        </div>
+                        <div class="about-feature">
+                            <i data-lucide="shield-check" style="width:18px;height:18px;"></i>
+                            <span>Safe Campus</span>
+                        </div>
+                        <div class="about-feature">
+                            <i data-lucide="bus" style="width:18px;height:18px;"></i>
+                            <span>Transport Facility</span>
+                        </div>
+                    </div>
+                    <a href="#admission" class="btn-primary">
+                        <i data-lucide="arrow-right" style="width:18px;height:18px;"></i>
+                        Enquire Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="section features-section" id="features">
+        <div class="section-inner">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Why Choose Us</div>
+                <h2 class="section-title">What Makes Us Stand Apart</h2>
+                <p class="section-desc">We provide a holistic learning environment that nurtures talent, builds character, and prepares students for a bright future.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon blue">
+                        <i data-lucide="monitor" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Smart Classrooms</h3>
+                    <p>Digital learning with interactive boards, projectors, and audio-visual aids for an engaging classroom experience.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon amber">
+                        <i data-lucide="flask-conical" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Modern Labs</h3>
+                    <p>Well-equipped Physics, Chemistry, Biology, and Computer labs for hands-on practical learning and experiments.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon green">
+                        <i data-lucide="trophy" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Sports Excellence</h3>
+                    <p>Professional coaching in cricket, football, basketball, athletics, and more with inter-school competition opportunities.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon purple">
+                        <i data-lucide="music" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Arts & Culture</h3>
+                    <p>Dedicated programs for dance, music, theatre, and visual arts to nurture creativity and self-expression.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon rose">
+                        <i data-lucide="heart-handshake" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Value Education</h3>
+                    <p>Character building through moral education, community service, and leadership development programs.</p>
+                </div>
+                <div class="feature-card animate-on-scroll">
+                    <div class="feature-icon cyan">
+                        <i data-lucide="brain" style="width:24px;height:24px;"></i>
+                    </div>
+                    <h3>Career Guidance</h3>
+                    <p>Expert counseling, aptitude testing, and career planning support from Class 9 onwards for informed decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACADEMICS -->
+    <section class="section" id="academics">
+        <div class="section-inner">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Academics</div>
+                <h2 class="section-title">Our Academic Programs</h2>
+                <p class="section-desc">Comprehensive education from Pre-Primary to Senior Secondary with a focus on conceptual understanding and skill development.</p>
+            </div>
+            <div class="academics-grid">
+                <div class="academic-card animate-on-scroll">
+                    <img src="https://picsum.photos/seed/nurserykids/500/300.jpg" alt="Pre-Primary">
+                    <div class="academic-card-body">
+                        <span class="academic-card-tag">Nursery – KG</span>
+                        <h3>Pre-Primary Wing</h3>
+                        <p>Play-based learning with a safe, joyful environment to build foundational skills and social development.</p>
+                    </div>
+                </div>
+                <div class="academic-card animate-on-scroll">
+                    <img src="https://picsum.photos/seed/primaryschool/500/300.jpg" alt="Primary">
+                    <div class="academic-card-body">
+                        <span class="academic-card-tag">Class I – V</span>
+                        <h3>Primary Section</h3>
+                        <p>Strong foundation in languages, mathematics, EVS, and creative arts with activity-based learning.</p>
+                    </div>
+                </div>
+                <div class="academic-card animate-on-scroll">
+                    <img src="https://picsum.photos/seed/middleschool23/500/300.jpg" alt="Middle">
+                    <div class="academic-card-body">
+                        <span class="academic-card-tag">Class VI – VIII</span>
+                        <h3>Middle School</h3>
+                        <p>Expanded curriculum with science, social studies, and skill-building to prepare for senior classes.</p>
+                    </div>
+                </div>
+                <div class="academic-card animate-on-scroll">
+                    <img src="https://picsum.photos/seed/seniorschool88/500/300.jpg" alt="Senior">
+                    <div class="academic-card-body">
+                        <span class="academic-card-tag">Class IX – XII</span>
+                        <h3>Senior Secondary</h3>
+                        <p>Science, Commerce & Humanities streams with board exam preparation and competitive exam coaching.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="section gallery-section" id="gallery">
+        <div class="section-inner">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Campus Gallery</div>
+                <h2 class="section-title">A Glimpse of Our Campus</h2>
+                <p class="section-desc">Explore our vibrant campus, modern infrastructure, and the lively spirit of our school community.</p>
+            </div>
+            <div class="gallery-grid animate-on-scroll">
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/seed/schoolbuilding77/800/600.jpg" alt="School Building">
+                    <div class="gallery-item-overlay"><span>Main School Building</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/seed/classroom2025/500/400.jpg" alt="Classroom">
+                    <div class="gallery-item-overlay"><span>Smart Classroom</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/seed/schoollab44/500/400.jpg" alt="Lab">
+                    <div class="gallery-item-overlay"><span>Science Laboratory</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/seed/schoolsports55/800/400.jpg" alt="Sports">
+                    <div class="gallery-item-overlay"><span>Sports Ground</span></div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/seed/schoollibrary66/500/400.jpg" alt="Library">
+                    <div class="gallery-item-overlay"><span>Library</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section" id="testimonials">
+        <div class="section-inner">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Testimonials</div>
+                <h2 class="section-title">What Parents Say About Us</h2>
+                <p class="section-desc">Real stories from parents who trust us with their children's education and future.</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                    </div>
+                    <div class="testimonial-quote">"</div>
+                    <p>The teachers here are truly dedicated. My daughter's confidence and academic performance have improved tremendously since she joined. Best decision we made!</p>
+                    <div class="testimonial-author">
+                        <img src="https://picsum.photos/seed/parent1face/100/100.jpg" alt="Parent" class="testimonial-avatar">
+                        <div class="testimonial-author-info">
+                            <strong>Rajesh Sharma</strong>
+                            <span>Parent of Class VIII Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                    </div>
+                    <div class="testimonial-quote">"</div>
+                    <p>Excellent infrastructure, safe environment, and a perfect balance of academics and co-curricular activities. My son loves going to school every day!</p>
+                    <div class="testimonial-author">
+                        <img src="https://picsum.photos/seed/parent2face/100/100.jpg" alt="Parent" class="testimonial-avatar">
+                        <div class="testimonial-author-info">
+                            <strong>Priya Mehta</strong>
+                            <span>Parent of Class V Student</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-stars">
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                        <i data-lucide="star" style="width:16px;height:16px;"></i>
+                    </div>
+                    <div class="testimonial-quote">"</div>
+                    <p>The personal attention given to each child is remarkable. The career guidance program helped my daughter choose the right stream. Highly recommended!</p>
+                    <div class="testimonial-author">
+                        <img src="https://picsum.photos/seed/parent3face/100/100.jpg" alt="Parent" class="testimonial-avatar">
+                        <div class="testimonial-author-info">
+                            <strong>Anil Verma</strong>
+                            <span>Parent of Class XI Student</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ADMISSION FORM -->
+    <section class="section admission-section" id="admission">
+        <div class="admission-inner">
+            <div class="admission-info animate-on-scroll">
+                <div class="section-label" style="color: rgba(255,255,255,0.8);">Admissions Open</div>
+                <h2>Give Your Child the Best Start in Life</h2>
+                <p>Admissions are now open for the academic session 2025-26. Fill the enquiry form and our admission counsellor will get in touch with you shortly via WhatsApp.</p>
+                <div class="admission-perks">
+                    <div class="admission-perk">
+                        <div class="admission-perk-icon">
+                            <i data-lucide="check" style="width:20px;height:20px;"></i>
+                        </div>
+                        <span>No admission fee for early birds</span>
+                    </div>
+                    <div class="admission-perk">
+                        <div class="admission-perk-icon">
+                            <i data-lucide="check" style="width:20px;height:20px;"></i>
+                        </div>
+                        <span>Scholarships for meritorious students</span>
+                    </div>
+                    <div class="admission-perk">
+                        <div class="admission-perk-icon">
+                            <i data-lucide="check" style="width:20px;height:20px;"></i>
+                        </div>
+                        <span>Free uniform & books for first 100 admissions</span>
+                    </div>
+                    <div class="admission-perk">
+                        <div class="admission-perk-icon">
+                            <i data-lucide="check" style="width:20px;height:20px;"></i>
+                        </div>
+                        <span>Easy EMI payment options available</span>
+                    </div>
+                    <div class="admission-perk">
+                        <div class="admission-perk-icon">
+                            <i data-lucide="check" style="width:20px;height:20px;"></i>
+                        </div>
+                        <span>Instant WhatsApp response guaranteed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="admission-form-card animate-on-scroll">
+                <h3>Quick Admission Enquiry</h3>
+                <p class="form-subtitle">Fill the form & we'll reach out on WhatsApp</p>
+                <form id="admissionForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Student Name *</label>
+                            <input type="text" id="studentName" placeholder="Enter student name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Parent Name *</label>
+                            <input type="text" id="parentName" placeholder="Enter parent name" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Class Applying For *</label>
+                            <select id="classApply" required>
+                                <option value="">Select Class</option>
+                                <option>Nursery</option>
+                                <option>LKG</option>
+                                <option>UKG</option>
+                                <option>Class I</option>
+                                <option>Class II</option>
+                                <option>Class III</option>
+                                <option>Class IV</option>
+                                <option>Class V</option>
+                                <option>Class VI</option>
+                                <option>Class VII</option>
+                                <option>Class VIII</option>
+                                <option>Class IX</option>
+                                <option>Class X</option>
+                                <option>Class XI - Science</option>
+                                <option>Class XI - Commerce</option>
+                                <option>Class XI - Humanities</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Phone Number *</label>
+                            <input type="tel" id="parentPhone" placeholder="Enter phone number" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Any Message</label>
+                        <textarea id="parentMessage" placeholder="Any specific query or message..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Submit via WhatsApp
+                    </button>
+                    <p class="form-note">Your information is secure and will only be used for admission purposes.</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+        <div class="section-inner">
+            <div class="section-header animate-on-scroll">
+                <div class="section-label">Contact Us</div>
+                <h2 class="section-title">Get in Touch with Us</h2>
+                <p class="section-desc">We'd love to hear from you. Reach out through any of the channels below.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-icon blue">
+                        <i data-lucide="phone" style="width:28px;height:28px;"></i>
+                    </div>
+                    <h3>Call Us</h3>
+                    <p>Speak directly with our admission counsellor for any queries.</p>
+                    <a href="#" class="blue" id="contactCall">
+                        <i data-lucide="phone-call" style="width:16px;height:16px;"></i>
+                        <span id="contactPhoneText">Call Now</span>
+                    </a>
+                </div>
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-icon green">
+                        <i data-lucide="message-circle" style="width:28px;height:28px;"></i>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>Send us a message on WhatsApp for a quick response.</p>
+                    <a href="#" class="green" id="contactWhatsapp">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        Chat Now
+                    </a>
+                </div>
+                <div class="contact-card animate-on-scroll">
+                    <div class="contact-icon amber">
+                        <i data-lucide="map-pin" style="width:28px;height:28px;"></i>
+                    </div>
+                    <h3>Visit Us</h3>
+                    <p id="contactAddress">Come visit our campus and see the facilities in person. Located in Your City.</p>
+                    <a href="https://maps.google.com/?q=Your+City" target="_blank" class="blue">
+                        <i data-lucide="navigation" style="width:16px;height:16px;"></i>
+                        Get Directions
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAP -->
+    <div class="map-section">
+        <div class="map-inner animate-on-scroll">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d250000!2d75.7!3d26.9!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDU0JzAwLjAiTiA3NcKwNDInMDAuMCJF!5e0!3m2!1sen!2sin!4v1" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="logo-name" id="footerSchoolName">ABC Public School</div>
+                <p id="footerDesc">A leading educational institution in Your City, committed to nurturing young minds and building future leaders since 2005.</p>
+                <div class="footer-social">
+                    <a href="#" aria-label="Facebook"><i data-lucide="facebook" style="width:18px;height:18px;"></i></a>
+                    <a href="#" aria-label="Instagram"><i data-lucide="instagram" style="width:18px;height:18px;"></i></a>
+                    <a href="#" aria-label="YouTube"><i data-lucide="youtube" style="width:18px;height:18px;"></i></a>
+                    <a href="#" aria-label="Twitter"><i data-lucide="twitter" style="width:18px;height:18px;"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#features">Why Choose Us</a></li>
+                    <li><a href="#academics">Academics</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                    <li><a href="#admission">Admissions</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Academics</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Pre-Primary</a></li>
+                    <li><a href="#">Primary School</a></li>
+                    <li><a href="#">Middle School</a></li>
+                    <li><a href="#">Secondary School</a></li>
+                    <li><a href="#">Senior Secondary</a></li>
+                    <li><a href="#">CBSE Curriculum</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contact Info</h4>
+                <div class="footer-contact-item">
+                    <i data-lucide="map-pin" style="width:16px;height:16px;"></i>
+                    <span id="footerAddress">Your City, India</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i data-lucide="phone" style="width:16px;height:16px;"></i>
+                    <span id="footerPhone">9999999999</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i data-lucide="mail" style="width:16px;height:16px;"></i>
+                    <span id="footerEmail">info@abcpublicschool.com</span>
+                </div>
+                <div class="footer-contact-item">
+                    <i data-lucide="clock" style="width:16px;height:16px;"></i>
+                    <span>Mon - Sat: 8:00 AM - 3:00 PM</span>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <span id="footerCopyright">© 2025 ABC Public School - Your City. All rights reserved.</span>
+            <span>Designed with ❤️ for Education</span>
+        </div>
+    </footer>
+
+    <!-- FLOATING BUTTONS -->
+    <div class="floating-buttons">
+        <a href="#" class="floating-btn call" id="floatingCall" aria-label="Call Now">
+            <i data-lucide="phone" style="width:24px;height:24px;"></i>
+        </a>
+        <a href="#" class="floating-btn whatsapp" id="floatingWhatsapp" aria-label="WhatsApp">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+        <button class="floating-btn top" id="scrollTopBtn" aria-label="Scroll to top">
+            <i data-lucide="chevron-up" style="width:24px;height:24px;"></i>
+        </button>
+    </div>
+
+    <script>
+        // ===== DYNAMIC DATA FROM URL PARAMETERS =====
+        const params = new URLSearchParams(window.location.search);
+
+        const schoolName = params.get("name") || "ABC Public School";
+        const city = params.get("city") || "Your City";
+        const phone = params.get("phone") || "9999999999";
+
+        // Derive email from school name
+        const emailSlug = schoolName.toLowerCase().replace(/[^a-z0-9]/g, '').substring(0, 15);
+        const email = params.get("email") || `${emailSlug}@school.com`;
+
+        // ===== UPDATE ALL DYNAMIC CONTENT =====
+
+        // Page title
+        document.title = `${schoolName} - ${city}`;
+
+        // Logo
+        document.getElementById('logoIcon').textContent = schoolName.charAt(0);
+        document.getElementById('logoName').textContent = schoolName;
+
+        // Hero
+        document.getElementById('heroSchoolName').textContent = schoolName;
+        document.getElementById('heroSubtitle').textContent = `Empowering Young Minds in ${city} with world-class education, values, and holistic development since 2005.`;
+
+        // Hero buttons
+        document.getElementById('heroCall').href = `tel:${phone}`;
+        document.getElementById('heroWhatsapp').href = `https://wa.me/${phone}?text=Hello%20${encodeURIComponent(schoolName)}%2C%20I%20want%20to%20know%20about%20admissions.`;
+
+        // About
+        document.getElementById('aboutTitle').textContent = `${schoolName} — A Name You Can Trust`;
+        document.getElementById('aboutPara1').textContent = `${schoolName} is a leading institution in ${city}, committed to providing quality education that goes beyond textbooks. Our mission is to foster all-round development of students, preparing them to become responsible citizens and future leaders.`;
+        document.getElementById('aboutPara2').textContent = `With a sprawling campus equipped with modern amenities, dedicated faculty, and a nurturing environment, we ensure every child receives the attention and guidance they deserve.`;
+
+        // Contact
+        document.getElementById('contactCall').href = `tel:${phone}`;
+        document.getElementById('contactPhoneText').textContent = `Call ${phone}`;
+        document.getElementById('contactWhatsapp').href = `https://wa.me/${phone}?text=Hello%20${encodeURIComponent(schoolName)}%2C%20I%20have%20a%20query.`;
+        document.getElementById('contactAddress').textContent = `Come visit our campus and see the facilities in person. Located in ${city}.`;
+
+        // Footer
+        document.getElementById('footerSchoolName').textContent = schoolName;
+        document.getElementById('footerDesc').textContent = `A leading educational institution in ${city}, committed to nurturing young minds and building future leaders since 2005.`;
+        document.getElementById('footerAddress').textContent = `${city}, India`;
+        document.getElementById('footerPhone').textContent = phone;
+        document.getElementById('footerEmail').textContent = email;
+        document.getElementById('footerCopyright').textContent = `© ${new Date().getFullYear()} ${schoolName} - ${city}. All rights reserved.`;
+
+        // Floating buttons
+        document.getElementById('floatingCall').href = `tel:${phone}`;
+        document.getElementById('floatingWhatsapp').href = `https://wa.me/${phone}?text=Hello%20${encodeURIComponent(schoolName)}`;
+
+        // ===== ADMISSION FORM → WHATSAPP =====
+        document.getElementById('admissionForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const studentName = document.getElementById('studentName').value.trim();
+            const parentName = document.getElementById('parentName').value.trim();
+            const classApply = document.getElementById('classApply').value;
+            const parentPhone = document.getElementById('parentPhone').value.trim();
+            const parentMessage = document.getElementById('parentMessage').value.trim();
+
+            if (!studentName || !parentName || !classApply || !parentPhone) {
+                showToast('Please fill all required fields', 'error');
+                return;
+            }
+
+            const message = `New Admission Request:
+Student Name: ${studentName}
+Parent Name: ${parentName}
+Class: ${classApply}
+Phone: ${parentPhone}
+Message: ${parentMessage || 'N/A'}
+
+---
+Sent from ${schoolName} Website`;
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodedMessage}`;
+
+            // Show toast
+            showToast('Redirecting to WhatsApp...');
+
+            // Open WhatsApp after a brief delay
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 800);
+
+            // Reset form
+            this.reset();
+        });
+
+        // ===== TOAST NOTIFICATION =====
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            toast.querySelector('.toast-text').textContent = message;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // ===== MOBILE MENU TOGGLE =====
+        const mobileToggle = document.getElementById('mobileToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        mobileToggle.addEventListener('click', function() {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // ===== SCROLL TO TOP BUTTON =====
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 400) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+
+        scrollTopBtn.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ===== SCROLL ANIMATIONS =====
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.animate-on-scroll').forEach(el => {
+            observer.observe(el);
+        });
+
+        // ===== INITIALIZE LUCIDE ICONS =====
+        lucide.createIcons();
+    </script>
+</body>
+</html>
